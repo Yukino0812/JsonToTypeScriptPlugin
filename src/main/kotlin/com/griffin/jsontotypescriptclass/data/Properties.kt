@@ -11,6 +11,7 @@ object Properties {
     private const val KEY_PREFIX = "com.griffin.jsontotypescriptclass."
 
     var isOptional by booleanProperties()
+    var isNullable by booleanProperties()
     var indentSpace by intProperties(4)
 
     private fun booleanProperties() = PropertiesComponentBooleanDelegate()

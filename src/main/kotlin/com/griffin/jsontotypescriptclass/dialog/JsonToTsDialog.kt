@@ -56,7 +56,7 @@ class JsonToTsDialog(
     override fun createCenterPanel(): JComponent {
         // 创建内容布局
         val panel = JPanel()
-        val gridLayoutManager = GridLayoutManager(5, 3, Insets(10, 10, 10, 10), -1, -1)
+        val gridLayoutManager = GridLayoutManager(6, 3, Insets(10, 10, 10, 10), -1, -1)
         gridLayoutManager.hGap = 10
         panel.layout = gridLayoutManager
         panel.add(tips, GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false))
@@ -88,8 +88,16 @@ class JsonToTsDialog(
         )
 
         panel.add(
+            JCheckBox("Nullable parameters").apply {
+                isSelected = Properties.isNullable
+                addChangeListener { event -> Properties.isNullable = (event.source as JCheckBox).isSelected }
+            },
+            GridConstraints(4, 0, 1, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false)
+        )
+
+        panel.add(
             JLabel("Indent space:"),
-            GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false)
+            GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false)
         )
         panel.add(
             JTextField(Properties.indentSpace.toString()).apply {
@@ -122,7 +130,7 @@ class JsonToTsDialog(
                     }
                 })
             },
-            GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false)
+            GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false)
         )
 
         panel.maximumSize = Dimension(800, 600)

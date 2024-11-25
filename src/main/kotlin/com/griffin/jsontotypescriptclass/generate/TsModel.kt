@@ -23,6 +23,7 @@ object TsModel {
             jsonElement: JsonElement
     ): String {
         val optionalMark: String = if (Properties.isOptional) "?" else ""
+        val nullableMark: String = if (Properties.isNullable) " | null" else ""
         val indent: String = " ".repeat(Properties.indentSpace)
 
         val fieldsText = when {
@@ -30,7 +31,7 @@ object TsModel {
                 val jsonObject = jsonElement.asJsonObject
                 jsonObject.entrySet().joinToString("\n") { (fieldName, fieldElement) ->
                     val fieldType = getFieldType(fieldElement, fieldName)
-                    "$indent$fieldName$optionalMark: $fieldType;"
+                    "$indent$fieldName$optionalMark: $fieldType$nullableMark;"
                 }
             }
 
